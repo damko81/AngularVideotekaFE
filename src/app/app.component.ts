@@ -71,6 +71,19 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public onDeleteMovieByDisc(disc: string): void{
+    document.getElementById('delete-movieByDisc-form')?.click();
+    this.movieService.deleteMovieByDisc(disc).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getMovies();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public onLoadMovies(disc: string): void{
     document.getElementById('load-movies-form')?.click();
     this.movieService.loadMovies(disc).subscribe(
@@ -105,6 +118,9 @@ export class AppComponent implements OnInit {
     }
     if (mode === 'load') {
       button.setAttribute('data-target', '#loadMoviesModal');
+    }
+    if (mode === 'deleteMovieByDisc') {
+      button.setAttribute('data-target', '#deleteMovieByDiscModal');
     }
     container?.appendChild(button);
     button.click();
