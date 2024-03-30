@@ -221,14 +221,14 @@
            </button>
         </div>
         <div class="modal-body">
-          <form #deleteForm="ngForm" (ngSubmit)="onDeleteMovieByDisc(discx.value)">
+          <form #deleteForm="ngForm">
            <div class="form-group">
               <label for="disc">Disc:</label>
               <input type="text" #discx="ngModel" ngModel name="disc" class="form-control" id="disc" placeholder="Disc" required>
            </div>
            <div class="modal-footer">
               <button type="button" id="delete-movieByDisc-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button [disabled]="deleteForm.invalid" type="submit" class="btn btn-danger">Delete</button>
+              <button [disabled]="deleteForm.invalid" (click)="confirmMethodDelete(discx.value)" class="btn btn-danger">Delete</button>
            </div>
           </form>
         </div>

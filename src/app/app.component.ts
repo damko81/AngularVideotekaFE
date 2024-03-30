@@ -84,6 +84,15 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public confirmMethodDelete(disc: string): void{
+    if(confirm("Are you sure to delete movies on disc "+disc)) {
+      this.onDeleteMovieByDisc(disc);
+    }
+    else{
+      document.getElementById('delete-movieByDisc-form')?.click();
+    }
+  }
+
   public onLoadMovies(disc: string): void{
     document.getElementById('load-movies-form')?.click();
     this.movieService.loadMovies(disc).subscribe(
