@@ -1,0 +1,267 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <app-menu></app-menu>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+       <ul class="navbar-nav mr-auto">
+          <li *ngIf="isLoggedIn" class="nav-item active">
+             <a class="nav-link" (click)="onOpenModal(null,'add')">Add Movie <span class="sr-only">(current)</span></a>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item active">
+            <a class="nav-link" (click)="onOpenModal(null,'load')">Load Movies <span class="sr-only">(current)</span></a>
+         </li>
+         <li *ngIf="isLoggedIn" class="nav-item active">
+           <a class="nav-link" (click)="onOpenModal(null,'deleteMovieByDisc')">Delete Movies Disc<span class="sr-only">(current)</span></a>
+        </li>
+       </ul>
+       <form class="form-inline my-2 my-lg-0">
+          <input type="search"
+           name="key" id="searchName" (ngModelChange)="searchMovies(key.value)" #key="ngModel" ngModel class="form-control mr-sm-2" placeholder="Search movies..." required>
+       </form>
+    </div>
+  </nav>
+  <div class="container" id="main-container">
+     <div class="row">
+        <div *ngFor="let movie of movies" class="col-md-6 col-xl-3">
+           <div class="card m-b-30">
+              <div class="card-body row">
+                 <div class="col-6">
+                    <a href="{{movie?.url}}"><img src="{{movie?.imageSrc}}" alt="" class="img-fluid rounded-circle w-60"></a>
+                    <p class="m-0">{{movie?.duration}}</p>
+                    <p class="m-0">Disc: {{movie?.disc}}</p>
+                 </div>
+                 <div class="col-6 card-title align-self-center mb-0">
+                    <h5 >{{movie?.name}}</h5>
+                    <p class="m-0">{{movie?.genre}}</p>
+                    <p class="m-0">Date: {{movie?.releaseDate}} Rating: {{movie?.rating}}</p>
+                 </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                 <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Director: {{movie?.director}}</li>
+                 <li class="list-group-item"><i class="fa fa-phone float-right"></i>Stars : {{movie?.stars}}</li>
+              </ul>
+              <div class="card-body">
+                 <div class="float-right btn-group btn-group-sm">
+                    <a (click)="onOpenModal(movie,'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    <a *ngIf="isLoggedIn" (click)="onOpenModal(movie,'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  
+    <!-- Add Movie Modal -->
+  <div class="modal fade" id="addMovieModal" tabindex="-1" role="dialog" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="addMovieModalLabel">Add Movie</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #addForm="ngForm" (ngSubmit)="onAddMovie(addForm)">
+             <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+             </div>
+             <div class="form-group">
+                <label for="genre">Genre</label>
+                <input type="text" ngModel name="genre" class="form-control" id="genre" placeholder="Genre" required>
+             </div>
+             <div class="form-group">
+              <label for="releaseDate">ReleaseDate</label>
+              <input type="text" ngModel name="releaseDate" class="form-control" id="releaseDate" placeholder="ReleaseDate" required>
+             </div>
+             <div class="form-group">
+              <label for="duration">Duration</label>
+              <input type="text" ngModel name="duration" class="form-control" id="duration" placeholder="Duration" required>
+             </div>
+             <div class="form-group">
+              <label for="rating">Rating</label>
+              <input type="text" ngModel name="rating" class="form-control" id="rating" placeholder="Rating" required>
+             </div>
+             <div class="form-group">
+                <label for="director">Director</label>
+                <input type="text" ngModel name="director" class="form-control" id="director" placeholder="Director" required>
+             </div>
+             <div class="form-group">
+                <label for="stars">Stars</label>
+                <input type="text" ngModel name="stars" class="form-control" id="stars" placeholder="Stars" required>
+             </div>
+             <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Description" required>
+             </div>
+             <div class="form-group">
+              <label for="disc">Disc</label>
+              <input type="text" ngModel name="disc" class="form-control" id="disc" placeholder="Disc" required>
+             </div>
+             <div class="form-group">
+              <label for="url">URL</label>
+              <input type="text" ngModel name="url" class="form-control" id="url" placeholder="URL" required>
+             </div>
+             <div class="form-group">
+                <label for="imageSrc">Image SRC</label>
+                <input type="text" ngModel name="imageSrc" class="form-control" id="imageSrc" placeholder="Image SRC" required>
+             </div>
+             <div class="modal-footer">
+                <button type="button" id="add-movie-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+             </div>
+             </form>
+          </div>
+       </div>
+     </div>
+     </div>
+   
+    <!-- Edit Modal -->
+   <div class="modal fade" id="updateMovieModal" tabindex="-1" role="dialog" aria-labelledby="movieEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateMovieModalLabel">Edit Movie {{editMovie?.name}}?</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+                <div class="form-group">
+                   <label for="name">Name</label>
+                   <input type="text" ngModel="{{editMovie?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+                </div>
+                <input type="hidden" ngModel="{{editMovie?.id}}" name="id" class="form-control" id="id" placeholder="id">
+                <div class="form-group">
+                   <label for="genre">Genre</label>
+                   <input type="text" ngModel="{{editMovie?.genre}}" name="genre" class="form-control" id="genre" placeholder="Genre">
+                </div>
+                <div class="form-group">
+                  <label for="releaseDate">ReleaseDate</label>
+                  <input type="text" ngModel="{{editMovie?.releaseDate}}" name="releaseDate" class="form-control" id="releaseDate" placeholder="ReleaseDate">
+                </div>
+                <div class="form-group">
+                  <label for="duration">Duration</label>
+                  <input type="text" ngModel="{{editMovie?.duration}}" name="duration" class="form-control" id="duration" placeholder="Duration">
+                </div>
+                <div class="form-group">
+                  <label for="rating">Rating</label>
+                  <input type="text" ngModel="{{editMovie?.rating}}" name="rating" class="form-control" id="rating" placeholder="Rating">
+                </div>
+                <div class="form-group">
+                   <label for="director">Director</label>
+                   <input type="text" ngModel="{{editMovie?.director}}" name="director" class="form-control" id="director" placeholder="Director">
+                </div>
+                <div class="form-group">
+                   <label for="stars">Stars</label>
+                   <input type="text" ngModel="{{editMovie?.stars}}" name="stars" class="form-control" id="stars" name="stars" placeholder="Stars">
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" ngModel="{{editMovie?.description}}" name="description" class="form-control" id="description" placeholder="Description">
+                </div>
+                <div class="form-group">
+                  <label for="disc">Disc</label>
+                  <input type="text" ngModel="{{editMovie?.disc}}"  name="disc" class="form-control" id="disc" placeholder="Disc">
+                 </div>
+                <div class="form-group">
+                  <label for="url">URL</label>
+                  <input type="text" ngModel="{{editMovie?.url}}"  name="url" class="form-control" id="url" placeholder="URL">
+                </div>
+                <div class="form-group">
+                   <label for="imageSrc">Image Src</label>
+                   <input type="text" ngModel="{{editMovie?.imageSrc}}" name="imageSrc" class="form-control" id="imageSrc" placeholder="Image Src">
+                </div>
+                <div class="modal-footer">
+                   <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button *ngIf="isLoggedIn" (click)="onUpdateMovie(editForm.value)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+  
+   <!-- Load Movie Modal -->
+   <div class="modal fade" id="loadMoviesModal" tabindex="-1" role="dialog" aria-labelledby="loadMoviesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="loadMoviesModalLabel">Load Movies From Disc</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+           <form #loadForm="ngForm" (ngSubmit)="onLoadMovies(disc.value)">
+            <div class="form-group">
+               <label for="disc">Disc:</label>
+               <input type="text" #disc="ngModel" ngModel name="disc" class="form-control" id="disc" placeholder="Disc" required>
+            </div>
+            <div class="modal-footer">
+               <button type="button" id="load-movies-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button [disabled]="loadForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+           </form>
+         </div>
+      </div>
+    </div>
+    </div>
+  
+    <!-- Delete Movie By Disc Modal Modal -->
+   <div class="modal fade" id="deleteMovieByDiscModal" tabindex="-1" role="dialog" aria-labelledby="deleteMovieByDiscModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteMovieByDiscModalLabel">Delete Movie By Disc</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+            <form #deleteForm="ngForm">
+             <div class="form-group">
+                <label for="disc">Disc:</label>
+                <input type="text" #discx="ngModel" ngModel name="disc" class="form-control" id="disc" placeholder="Disc" required>
+             </div>
+             <div class="modal-footer">
+                <button type="button" id="delete-movieByDisc-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button [disabled]="deleteForm.invalid" (click)="confirmMethodDelete(discx.value)" class="btn btn-danger">Delete</button>
+             </div>
+            </form>
+          </div>
+       </div>
+     </div>
+     </div>
+  
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteMovieModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Delete Movie</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete movie {{deleteMovie?.name}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteMovie(deleteMovie?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
+    </div>
+   </div>
+  </div>
+  
+     <!-- Notification for no movies -->
+  <div *ngIf="movies?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+   <div class="alert alert-info" role="alert">
+     <h4 class="alert-heading">NO MOVIES!</h4>
+     <p>No Movies were found.</p>
+   </div>
+  </div>
