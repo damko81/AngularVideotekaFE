@@ -15,7 +15,8 @@ export class MenuComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService, private cookieService: CookieService) { }
+    private authenticationService: AuthenticationService, 
+    private cookieService: CookieService) { }
 
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
