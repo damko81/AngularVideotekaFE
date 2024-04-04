@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthenticationService {
   public username: string = "";
   public password: string = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   authenticationService(username: string, password: string) {
     return this.http.get(`http://localhost:8080/movie/basicauth`,
@@ -31,6 +32,7 @@ export class AuthenticationService {
   registerSuccessfulLogin(username: string, password: string) {
     let basicAuthToken = this.createBasicAuthToken(username, password);
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, basicAuthToken);
+    this.cookieService.set("username", username);
   }
 
   getIt() {
@@ -39,6 +41,7 @@ export class AuthenticationService {
 
   logout() {
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
+    this.cookieService.delete("username");
     this.username = "";
     this.password = "";
   }
