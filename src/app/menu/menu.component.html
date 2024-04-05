@@ -11,6 +11,9 @@
             <li>
                 <a *ngIf="isLoggedIn" class="nav-link" href="/logout" (click)=handleLogout() style="color:white;">Logout</a>
             </li>
+            <li>
+                <a *ngIf="!isLoggedIn" class="nav-link" href="/register" style="color:white;">Register</a>
+            </li>
         </ul>
     </nav>
 </header>
