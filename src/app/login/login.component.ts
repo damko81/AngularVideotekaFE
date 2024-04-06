@@ -49,8 +49,9 @@ export class LoginComponent implements OnInit {
  
         if (resultData.message == "Username not exits"){
       
-          alert("Username not exits");
-    
+          this.invalidLogin = true;
+          this.loginSuccess = false;
+          this.errorMessage = "Username not exits";
         }
         else if(resultData.message == "Login Success") {
             this.authenticationService.registerSuccessfulLogin(this.username, this.password)
@@ -61,7 +62,9 @@ export class LoginComponent implements OnInit {
         }
         else
         {
-          alert("Incorrect Username and Password not match");
+          this.invalidLogin = true;
+          this.loginSuccess = false;
+          this.errorMessage = "Incorrect Username and Password not match";
         }
       });
     }
