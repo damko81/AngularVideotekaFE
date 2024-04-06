@@ -14,6 +14,9 @@
             <li>
                 <a *ngIf="!isLoggedIn" class="nav-link" href="/register" style="color:white;">Register</a>
             </li>
+            <li>
+                <a *ngIf="authLoginSuccess" class="nav-link" href="/users" style="color:white;">Users</a>
+            </li>
         </ul>
     </nav>
 </header>

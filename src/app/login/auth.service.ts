@@ -13,6 +13,7 @@ export class AuthenticationService {
 
   public username: string = "";
   public password: string = "";
+  private authLoginSuccess: boolean = false;
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
@@ -22,7 +23,7 @@ export class AuthenticationService {
         this.username = username;
         this.password = password;
         this.registerSuccessfulLogin(username, password);
-      }));
+      }))
   }
 
   createBasicAuthToken(username: string, password: string) {
@@ -35,6 +36,13 @@ export class AuthenticationService {
     this.cookieService.set("username", username);
   }
 
+  setAuthLoginSuccess(authLoginSuccess: boolean){
+    this.authLoginSuccess = authLoginSuccess;
+    if(authLoginSuccess){this.cookieService.set('authLoginSuccess', 'T');}
+    else{this.cookieService.set('authLoginSuccess', 'F');}
+    
+  }
+
   getIt() {
     return sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
   }
@@ -42,6 +50,8 @@ export class AuthenticationService {
   logout() {
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
     this.cookieService.delete("username");
+    this.cookieService.delete('authLoginSuccess');
+    this.authLoginSuccess = false;
     this.username = "";
     this.password = "";
   }

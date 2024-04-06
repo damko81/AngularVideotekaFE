@@ -11,6 +11,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class MenuComponent implements OnInit {
 
   isLoggedIn = false;
+  authLoginSuccess: boolean = false;
   username: string | null = ""; 
 
   constructor(private route: ActivatedRoute,
@@ -19,6 +20,8 @@ export class MenuComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.cookieService.get('authLoginSuccess') == 'T'){this.authLoginSuccess = true;}
+    else{this.authLoginSuccess = false;}
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
     this.username = this.cookieService.get("username");
     console.log('menu ->' + this.isLoggedIn);

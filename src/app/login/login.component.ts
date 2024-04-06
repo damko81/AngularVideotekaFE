@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public successMessage: string = "";
   public invalidLogin: boolean = false;
   public loginSuccess: boolean = false;
+  public authLoginSuccess: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -30,6 +31,8 @@ export class LoginComponent implements OnInit {
       this.authenticationService.authenticationService(this.username, this.password).subscribe((result)=> {
       this.invalidLogin = false;
       this.loginSuccess = true;
+      this.authLoginSuccess = true;
+      this.authenticationService.setAuthLoginSuccess(true);
       this.successMessage = 'Login Successful.';
       this.router.navigate(['/movie']);
     }, () => {
@@ -39,34 +42,41 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
+    
+    //Preverimo, ali gre za autorizirano osebo in ta zmaga.
+    this.handleLoginAuth();
+    //Če ni avtorizirana, preverimo, če je med registriranimi uporabniki
+    if(!this.authLoginSuccess){
+
+          let bodyData = {
+            username: this.username,
+            password: this.password,
+          }; 
+          this.http.post(`http://localhost:8080/users/login`, bodyData).subscribe(  (resultData: any) => {
+          console.log(resultData);
   
-    let bodyData = {
-      username: this.username,
-      password: this.password,
-    }; 
-        this.http.post(`http://localhost:8080/users/login`, bodyData).subscribe(  (resultData: any) => {
-        console.log(resultData);
- 
-        if (resultData.message == "Username not exits"){
-      
-          this.invalidLogin = true;
-          this.loginSuccess = false;
-          this.errorMessage = "Username not exits";
-        }
-        else if(resultData.message == "Login Success") {
-            this.authenticationService.registerSuccessfulLogin(this.username, this.password)
-            this.invalidLogin = false;
-            this.loginSuccess = true;
-            this.successMessage = 'Login Successful.';
-            this.router.navigate(['/movie']);     
-        }
-        else
-        {
-          this.invalidLogin = true;
-          this.loginSuccess = false;
-          this.errorMessage = "Incorrect Username and Password not match";
-        }
-      });
+          if (resultData.message == "Username not exits"){
+        
+            this.invalidLogin = true;
+            this.loginSuccess = false;
+            this.errorMessage = "Username not exits";
+          }
+          else if(resultData.message == "Login Success") {
+              this.authenticationService.registerSuccessfulLogin(this.username, this.password)
+              this.invalidLogin = false;
+              this.loginSuccess = true;
+              this.successMessage = 'Login Successful.';
+              this.router.navigate(['/movie']);     
+          }
+          else
+          {
+            this.invalidLogin = true;
+            this.loginSuccess = false;
+            this.errorMessage = "Incorrect Username and Password not match";
+          }
+        });
+
+     }
     }
 
 
