@@ -32,6 +32,18 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  public onUpdateUsers(user: Users): void{
+    this.usersService.updateUsers(user).subscribe(
+      (response: Users) => {
+        console.log(response);
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public onDeleteUsers(id?: number): void{
     this.usersService.deleteUsers(id).subscribe(
       (response: void) => {
