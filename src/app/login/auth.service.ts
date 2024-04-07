@@ -13,7 +13,7 @@ export class AuthenticationService {
 
   public username: string = "";
   public password: string = "";
-  private authLoginSuccess: boolean = false;
+  public authLoginSuccess: boolean = false;
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
