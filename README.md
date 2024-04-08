@@ -33,4 +33,7 @@ Odprejo se administracijske možnosti, npr. Users za urejanje registriranih upor
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/65b00b5e-c528-4ae9-a044-d3b3837e82c6)
 
+Pregled Users:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/1d7a495f-9a89-42a9-a156-8f962313ef90)
 
