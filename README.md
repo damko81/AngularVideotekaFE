@@ -6,7 +6,7 @@ Uporablja MSSqlServer14 za hrambo.
 
 Pot http://localhost:4200/ vodi na Videoteca, kot neprijavljen uporabik.
 Neprijavljen uporabnik lahko le gleda seznam naloženih lilmov:
-![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/55a43d45-49ca-4ac7-8911-3b809adcb7c5)
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/cb01d540-96d0-4615-a3ad-5ee5cdd7f203)
 
 Ob prijavi z registriranim uporabnikom:
 
