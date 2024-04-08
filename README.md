@@ -25,4 +25,12 @@ Filmi, ki so na izbranem direktoriju, se uvozijo v MSSqlServer14. Podatki o film
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/09e718f4-1ce0-46f7-b96c-7fea530c40a7)
 
-...itd...
+Prijava z autenticiranim uporabnikom admin:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/73196116-37c9-4296-b523-288930423fd7)
+
+Odprejo se administracijske možnosti, npr. Users za urejanje registriranih uporabnikov:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/65b00b5e-c528-4ae9-a044-d3b3837e82c6)
+
+
