@@ -37,3 +37,7 @@ Pregled Users:
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/1d7a495f-9a89-42a9-a156-8f962313ef90)
 
+Edit:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/bc240fcc-74fb-450c-8104-5d8edddf6a13)
+
