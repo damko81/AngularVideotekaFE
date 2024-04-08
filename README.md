@@ -8,6 +8,10 @@ Pot http://localhost:4200/ vodi na Videoteca, kot neprijavljen uporabik.
 Neprijavljen uporabnik lahko le gleda seznam naloženih lilmov:
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/cb01d540-96d0-4615-a3ad-5ee5cdd7f203)
 
+Novi uporabnik izvede registracijo z klikom na Register:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/737d9b0e-995b-4d31-aff7-3eabc9fc95e1)
+
 Ob prijavi z registriranim uporabnikom:
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/29015b0e-21cd-482f-82e1-0d8f3b79ba68)
