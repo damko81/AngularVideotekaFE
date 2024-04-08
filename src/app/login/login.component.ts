@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from './auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Users } from '../users/users';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +24,11 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) {   }
+    private authenticationService: AuthenticationService,
+    private cookieService: CookieService) {   }
 
   ngOnInit() {
+    this.username = this.cookieService.get("username");
   }
 
   handleLoginAuth() {
@@ -42,7 +46,36 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    
+    //Preverimo, ali gre za autorizirano osebo in ta zmaga.
+    this.handleLoginAuth();
+    //Če ni avtorizirana, preverimo, če je med registriranimi uporabniki
+    if(!this.authLoginSuccess){
+          let bodyData = {
+            username: this.username,
+            password: this.password,
+          }; 
+          this.http.post(`http://localhost:8080/users/login`, bodyData).subscribe(  (resultData: any) => {
+              console.log(resultData);
+              this.authenticationService.registerSuccessfulLogin(this.username, this.password)
+              this.cookieService.set("id", resultData.id);
+              this.cookieService.set("name", resultData.name);
+              this.cookieService.set("passwordEncr", resultData.password);
+              this.invalidLogin = false;
+              this.loginSuccess = true;
+              this.successMessage = 'Login Successful.';
+              this.router.navigate(['/movie']); 
+            },
+            (error: HttpErrorResponse) => {
+              this.invalidLogin = true;
+              this.loginSuccess = false;
+              this.errorMessage = "Incorrect Username and Password not match";
+            }
+          );
+     }
+    }
+
+//Obsolete: Vrača txt sporočilo in ne objekta Users
+  Loginmsg() {
     //Preverimo, ali gre za autorizirano osebo in ta zmaga.
     this.handleLoginAuth();
     //Če ni avtorizirana, preverimo, če je med registriranimi uporabniki
@@ -52,7 +85,7 @@ export class LoginComponent implements OnInit {
             username: this.username,
             password: this.password,
           }; 
-          this.http.post(`http://localhost:8080/users/login`, bodyData).subscribe(  (resultData: any) => {
+          this.http.post(`http://localhost:8080/users/loginmsg`, bodyData).subscribe(  (resultData: any) => {
           console.log(resultData);
   
           if (resultData.message == "Username not exits"){
@@ -75,7 +108,6 @@ export class LoginComponent implements OnInit {
             this.errorMessage = "Incorrect Username and Password not match";
           }
         });
-
      }
     }
 

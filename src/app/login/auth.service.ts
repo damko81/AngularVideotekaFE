@@ -34,6 +34,7 @@ export class AuthenticationService {
     let basicAuthToken = this.createBasicAuthToken(username, password);
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, basicAuthToken);
     this.cookieService.set("username", username);
+    this.cookieService.set("password", password);
   }
 
   setAuthLoginSuccess(authLoginSuccess: boolean){
@@ -49,7 +50,11 @@ export class AuthenticationService {
 
   logout() {
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
+    this.cookieService.delete("id");
+    this.cookieService.delete("name");
     this.cookieService.delete("username");
+    this.cookieService.delete("password");
+    this.cookieService.delete("passwordEncr");
     this.cookieService.delete('authLoginSuccess');
     this.authLoginSuccess = false;
     this.username = "";
