@@ -4,6 +4,7 @@ import { MovieComponent } from './movie/movie.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 const routes: Routes = [
   {path: 'movie', component: MovieComponent},
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '', component: RegisterComponent},
+  {path: 'file-upload', component: FileUploadComponent},
+  {path: '', component: FileUploadComponent},
   {path: 'logout', component: MovieComponent},
 ];
 

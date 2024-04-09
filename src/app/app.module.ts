@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UsersComponent } from './users/users.component';
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

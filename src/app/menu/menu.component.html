@@ -15,6 +15,9 @@
                 <a *ngIf="!isLoggedIn" class="nav-link" href="/register" style="color:white;">Register</a>
             </li>
             <li>
+               <a *ngIf="authLoginSuccess" class="nav-link" href="/file-upload" style="color:white;">Import XML</a>
+           </li>
+            <li>
                 <a *ngIf="authLoginSuccess" class="nav-link" href="/users" style="color:white;">Users</a>
             </li>
         </ul>
