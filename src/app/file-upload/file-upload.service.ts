@@ -31,6 +31,15 @@ export class FileUploadService {
     return this.http.get(`${this.baseUrl}/file/files`);
   }
 
+  public loadMoviesFromXml(name: string): Observable<HttpEvent<any>>{
+    const req = new HttpRequest('POST', `${this.baseUrl}/file/loadMoviesFromXml/${name}`,{
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
   public delete(name: string): Observable<HttpEvent<any>>{
     return this.http.delete<HttpEvent<any>>(`${this.baseUrl}/file/delete/${name}`);
   }
