@@ -49,7 +49,10 @@ export class FileUploadComponent implements OnInit {
 
       if (file) {
         this.currentFile = file;
-
+        if(this.currentFile.name != 'Filmi.xml'){
+          this.message = 'You have to choose file Filmi.xml !';
+        }
+      else{
         this.uploadService.upload(this.currentFile).subscribe(
           (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
@@ -71,6 +74,7 @@ export class FileUploadComponent implements OnInit {
 
             this.currentFile = undefined;
           });
+        }
       }
       this.selectedFiles = undefined;
     }

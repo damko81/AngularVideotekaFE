@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,14 @@ import { environment } from '../../environments/environment.development';
 export class FileUploadService {
   private baseUrl = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private cookieService: CookieService) { }
 
   upload(file: File): Observable<HttpEvent<any>> {
+    let fileName:string = this.cookieService.get("username") + '_' + file.name;
     const formData: FormData = new FormData();
 
-    formData.append('file', file);
+    formData.append('file', file, fileName);
 
     const req = new HttpRequest('POST', `${this.baseUrl}/file/upload`, formData, {
       reportProgress: true,
