@@ -12,6 +12,7 @@ export class FileUploadComponent implements OnInit {
 
   selectedFiles?: FileList;
   currentFile?: File;
+  deleteFileName?: string | null;
   progress = 0;
   message = '';
 
@@ -26,6 +27,19 @@ export class FileUploadComponent implements OnInit {
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
+
+  public delete(name: string): void{
+      this.uploadService.delete(name).subscribe(
+        (event: any) => {
+          this.message = event.message;
+          this.fileInfos = this.uploadService.getFiles();
+        },
+        (err: any) => {
+          console.log(err);
+          this.message = err.message;
+        }
+      );
+  }  
 
   upload(): void {
     this.progress = 0;
@@ -60,6 +74,21 @@ export class FileUploadComponent implements OnInit {
       }
       this.selectedFiles = undefined;
     }
+  }
+
+  public onOpenModal(filename: string  | null,mode?: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'delete') {
+      this.deleteFileName = filename;
+      button.setAttribute('data-target', '#deleteFileModal');
+    }
+    container?.appendChild(button);
+    button.click();
+
   }
 
 }

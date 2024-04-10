@@ -18,7 +18,7 @@ export class FileUploadService {
 
     const req = new HttpRequest('POST', `${this.baseUrl}/file/upload`, formData, {
       reportProgress: true,
-      responseType: 'json'
+      responseType: 'text'
     });
 
     return this.http.request(req);
@@ -26,6 +26,10 @@ export class FileUploadService {
 
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/file/files`);
+  }
+
+  public delete(name: string): Observable<HttpEvent<any>>{
+    return this.http.delete<HttpEvent<any>>(`${this.baseUrl}/file/delete/${name}`);
   }
 
 }

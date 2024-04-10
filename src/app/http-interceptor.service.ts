@@ -13,7 +13,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         if (this.authenticationService.isUserLoggedIn() && req.url.indexOf('basicauth') === -1) {
             const authReq = req.clone({
                 headers: new HttpHeaders({
-                    //'Content-Type': 'application/json', // Težava zaradi upload datotek
+                    //'Content-Type': 'application/json', // Težava zaradi upload datotek MultipartException: Current request is not a multipart request
                     'Authorization': `${authService.getIt()}`,
                 })
             });
