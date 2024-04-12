@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { FileUploadService } from './file-upload.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class FileUploadComponent implements OnInit {
   selectedFiles?: FileList;
   currentFile?: File;
   exprFile?: any;
+  exprFiles?: Observable<any>;
   fileInfos?: Observable<any>;
   deleteFileName?: string | null;
   progress = 0;
@@ -22,6 +23,7 @@ export class FileUploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.fileInfos = this.uploadService.getFiles();
+    this.exprFiles = this.uploadService.getDownloadFiles();
   }
 
   selectFile(event: any): void {
@@ -72,6 +74,7 @@ export class FileUploadComponent implements OnInit {
           this.progress = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
           this.message = event.body.message;
+          this.exprFiles = this.uploadService.getDownloadFiles();
         }
       },
       (err: any) => {

@@ -12,7 +12,19 @@
       <button style="margin-left: 18px" class="btn btn-success btn-sm" (click)="export()">
         Export
       </button>
-      <a style="color:blue; margin-left: 2px;" href="{{exprFile?.url}}">{{exprFile?.name}}</a>
+      <div style="margin-top: 10px" class="card-header">List of exported Filmi.xml Files</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>File Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of exprFiles  | async">
+            <td><a style="color:blue;" href="{{e.url}}">{{e.name}}</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
 <div *ngIf="currentFile" class="progress my-3">

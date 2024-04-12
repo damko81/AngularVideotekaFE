@@ -40,6 +40,10 @@ export class FileUploadService {
     return this.http.get(`${this.baseUrl}/file/files`);
   }
 
+  getDownloadFiles(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/file/downloadfiles`);
+  }
+
   public loadMoviesFromXml(name: string): Observable<HttpEvent<any>>{
     const req = new HttpRequest('POST', `${this.baseUrl}/file/loadMoviesFromXml/${name}`,{
       reportProgress: true,
