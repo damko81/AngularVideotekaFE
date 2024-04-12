@@ -12,11 +12,11 @@ export class FileUploadComponent implements OnInit {
 
   selectedFiles?: FileList;
   currentFile?: File;
+  exprFile?: any;
+  fileInfos?: Observable<any>;
   deleteFileName?: string | null;
   progress = 0;
   message = '';
-
-  fileInfos?: Observable<any>;
 
   constructor(private uploadService: FileUploadService) { }
 
@@ -62,6 +62,27 @@ export class FileUploadComponent implements OnInit {
             }
       }
     );
+  }
+
+  export(): void {
+    this.progress = 0;
+    this.uploadService.export().subscribe(
+      (event: any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          this.message = event.body.message;
+        }
+      },
+      (err: any) => {
+        console.log(err);
+        this.progress = 0;
+        if (err.error && err.error.message) {
+          this.message = err.error.message;
+        } else {
+          this.message = 'Could not export the file!';
+        }
+      });  
   }
 
   upload(): void {

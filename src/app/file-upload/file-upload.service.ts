@@ -27,6 +27,15 @@ export class FileUploadService {
     return this.http.request(req);
   }
 
+  export(): Observable<HttpEvent<any>> {
+    const req = new HttpRequest('POST', `${this.baseUrl}/file/export`, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/file/files`);
   }

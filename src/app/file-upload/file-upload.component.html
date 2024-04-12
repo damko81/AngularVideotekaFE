@@ -9,6 +9,10 @@
       <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
         Upload
       </button>
+      <button style="margin-left: 18px" class="btn btn-success btn-sm" (click)="export()">
+        Export
+      </button>
+      <a style="color:blue; margin-left: 2px;" href="{{exprFile?.url}}">{{exprFile?.name}}</a>
     </div>
 </div>
 <div *ngIf="currentFile" class="progress my-3">
