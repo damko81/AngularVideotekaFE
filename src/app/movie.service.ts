@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from './movie';
 import { environment } from '../environments/environment.development';
@@ -32,7 +32,12 @@ export class MovieService{
       return this.http.delete<void>(`${this.apiServerUrl}/movie/deleteMovieByDisc/${disc}`);
   }
 
-  public loadMovies(disc: string): Observable<Movie[]>{
-      return this.http.post<Movie[]>(`${this.apiServerUrl}/movie/load`,disc);
+  public loadMovies(disc: string): Observable<HttpEvent<any>>{
+    
+      const req = new HttpRequest('POST', `${this.apiServerUrl}/movie/load/`,disc,{
+        responseType: 'text'
+      });
+  
+      return this.http.request(req);
   }
 }

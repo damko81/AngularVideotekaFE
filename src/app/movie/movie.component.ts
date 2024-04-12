@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
@@ -16,6 +16,8 @@ export class MovieComponent implements OnInit {
   public editMovie?: Movie | null;
   public deleteMovie?: Movie | null;
   public isLoggedIn = false;
+  loadProgress = false;
+  message = '';
 
   constructor(private movieService: MovieService, 
               private authenticationService: AuthenticationService) { }
@@ -35,6 +37,7 @@ export class MovieComponent implements OnInit {
         alert(error.message);
       }
     );
+    this.loadProgress = false;
   }
 
   public onUpdateMovie(movie: Movie): void{
@@ -99,18 +102,25 @@ export class MovieComponent implements OnInit {
   }
 
   public onLoadMovies(disc: string): void{
+    this.loadProgress = true;
     document.getElementById('load-movies-form')?.click();
     this.movieService.loadMovies(disc).subscribe(
-      (response: Movie[]) => {
-        console.log(response);
-        this.getMovies();
+      (event: any) => {
+       if (event instanceof HttpResponse) {
+          this.message = event.body.message;
+          this.getMovies();
+        }
       },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+      (err: any) => {
+        console.log(err);
+        if (err.error && err.error.message) {
+          this.message = err.error.message;
+        } else {
+          this.message = 'Could not upload the movies!';
+        }
       }
-      
     );
-    
+   
   }
 
   public onOpenModal(movie: Movie | null, mode?: string): void {

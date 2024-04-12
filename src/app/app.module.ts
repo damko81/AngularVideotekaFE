@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
@@ -26,6 +26,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     FileUploadComponent
   ],
   imports: [
+    MatProgressBarModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
