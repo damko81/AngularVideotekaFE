@@ -39,9 +39,29 @@
         {{ progress }}%
     </div>
 </div>
-<div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div> 
-<div style="margin-left: 6px" class="container p-2" id="main-container">
-  <div class="card-header">List for import Filmi.xml Files</div>
+<div *ngIf="isLoggedIn" class="alert alert-secondary" role="alert">{{ message }}</div>
+<div *ngIf="isLoggedIn" style="margin-left: 6px" class="container p-2" id="main-container">
+  <div class="card-header">List for import Login Filmi.xml Files</div>
+  <table class="table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of fileForLoginInfos | async">
+          <td><a style="color:blue;" href="{{file.url}}">{{file.name}}</a></td>
+          <td>   
+                <button class='btn btn-primary tooltips' (click)="loadMoviesFromXml(file.name)">Load Movies</button>
+                <button style="margin-left: 10px" class='btn btn-danger' (click)="onOpenModal(file.name,'delete')">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div> 
+<div *ngIf="authLoginSuccess" style="margin-left: 6px" class="container p-2" id="main-container">
+  <div class="card-header">List for import All Filmi.xml Files</div>
   <table class="table">
       <thead>
         <tr>

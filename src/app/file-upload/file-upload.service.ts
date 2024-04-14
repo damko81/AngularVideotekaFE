@@ -36,6 +36,10 @@ export class FileUploadService {
     return this.http.request(req);
   }
 
+  getForLoginFiles(username: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/file/filesForLogin/${username}`);
+  }
+
   getFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/file/files`);
   }

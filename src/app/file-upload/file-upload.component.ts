@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, first } from 'rxjs';
 import { FileUploadService } from './file-upload.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthenticationService } from '../login/auth.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,18 +12,27 @@ import { FileUploadService } from './file-upload.service';
 })
 export class FileUploadComponent implements OnInit {
 
+  isLoggedIn = false;
+  authLoginSuccess: boolean = false;
   selectedFiles?: FileList;
   currentFile?: File;
   exprFile?: any;
   exprFiles?: Observable<any>;
+  fileForLoginInfos?: Observable<any>;
   fileInfos?: Observable<any>;
   deleteFileName?: string | null;
   progress = 0;
   message = '';
 
-  constructor(private uploadService: FileUploadService) { }
+  constructor(private uploadService: FileUploadService,
+              private authenticationService: AuthenticationService, 
+              private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    if(this.cookieService.get('authLoginSuccess') == 'T'){this.authLoginSuccess = true;}
+    else{this.authLoginSuccess = false;}
+    this.isLoggedIn = this.authenticationService.isUserLoggedIn();
+    this.fileForLoginInfos = this.uploadService.getForLoginFiles(this.cookieService.get('username'));
     this.fileInfos = this.uploadService.getFiles();
     this.exprFiles = this.uploadService.getDownloadFiles();
   }
@@ -35,6 +46,7 @@ export class FileUploadComponent implements OnInit {
         (event: any) => {
           this.message = event.message;
           this.fileInfos = this.uploadService.getFiles();
+          this.fileForLoginInfos = this.uploadService.getForLoginFiles(this.cookieService.get('username'));
         },
         (err: any) => {
           console.log(err);
@@ -51,6 +63,7 @@ export class FileUploadComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
               this.fileInfos = this.uploadService.getFiles();
+              this.fileForLoginInfos = this.uploadService.getForLoginFiles(this.cookieService.get('username'));
             }
       },
       (err: any) => {
@@ -107,6 +120,7 @@ export class FileUploadComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
               this.fileInfos = this.uploadService.getFiles();
+              this.fileForLoginInfos = this.uploadService.getForLoginFiles(this.cookieService.get('username'));
             }
           },
           (err: any) => {
