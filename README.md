@@ -76,6 +76,14 @@ V seznamu datotek klienta vidimo [ime uporabnika]_Filmi.xml
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/b952c23d-8756-4619-a3d9-6bea9d4964ad)
 
+Za dodajanje filmov v sistem kliknemo Load Movies, ki doda filme iz datoteke [ime uporabnika]_Filmi.xml:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/645c7e9a-e3cd-4ebf-a0da-71ed85978640)
+
+V sistem se je odal novi filem Evil Dead, ki je sedaj viden:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/8d089cfa-5497-4f68-b317-6696e3a3970f)
+
 
 
 
