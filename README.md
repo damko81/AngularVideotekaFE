@@ -86,7 +86,8 @@ V sistem se je odal novi filem Evil Dead, ki je sedaj viden:
 
 Če se v sistem prijavimo kot uporabnik = admin z geslom = password, se v Imp/Exp XML vidijo uvozi vseh [username]_Filmi.xml datotek:
 
-![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/ca0968d0-6cda-4cb8-b114-d7fb3ac1aa1a)
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/23581f93-6585-4402-ac71-a77b283b584e)
+
 
 
 
