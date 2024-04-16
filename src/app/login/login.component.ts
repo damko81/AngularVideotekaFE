@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 import { AuthenticationService } from './auth.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Users } from '../users/users';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -22,13 +21,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
     private cookieService: CookieService) {   }
 
   ngOnInit() {
-    this.username = this.cookieService.get("username");
+     this.username = this.cookieService.get("username");
   }
 
   handleLoginAuth() {

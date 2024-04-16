@@ -28,16 +28,14 @@ export class MovieService{
       return this.http.delete<void>(`${this.apiServerUrl}/movie/delete/${movieid}`);
   }
 
-  public deleteMovieByDisc(disc?: string): Observable<void>{
+  public deleteMovieByDisc(disc: string): Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/movie/deleteMovieByDisc/${disc}`);
   }
 
   public loadMovies(disc: string): Observable<HttpEvent<any>>{
     
-      const req = new HttpRequest('POST', `${this.apiServerUrl}/movie/load/`,disc,{
-        responseType: 'text'
-      });
-  
-      return this.http.request(req);
+    return this.http.post<HttpEvent<any>>(`${this.apiServerUrl}/movie/load`,disc);
+      
   }
+
 }

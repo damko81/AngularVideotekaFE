@@ -29,12 +29,14 @@ export class FileUploadComponent implements OnInit {
               private cookieService: CookieService) { }
 
   ngOnInit(): void {
+   
     if(this.cookieService.get('authLoginSuccess') == 'T'){this.authLoginSuccess = true;}
     else{this.authLoginSuccess = false;}
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
     this.fileForLoginInfos = this.uploadService.getForLoginFiles(this.cookieService.get('username'));
     this.fileInfos = this.uploadService.getFiles();
     this.exprFiles = this.uploadService.getDownloadFiles();
+   
   }
 
   selectFile(event: any): void {

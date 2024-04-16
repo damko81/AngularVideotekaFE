@@ -27,6 +27,7 @@ export class MenuComponent implements OnInit {
   newPasswordConf: string = "";
   message : string = "";
 
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService, 
@@ -34,6 +35,7 @@ export class MenuComponent implements OnInit {
     private usersService: UsersService) { }
 
   ngOnInit() {
+    
     if(this.cookieService.get('authLoginSuccess') == 'T'){this.authLoginSuccess = true;}
     else{this.authLoginSuccess = false;}
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();

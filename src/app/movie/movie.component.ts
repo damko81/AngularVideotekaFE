@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 import { AuthenticationService } from '../login/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -19,7 +20,8 @@ export class MovieComponent implements OnInit {
   loadProgress = false;
   message = '';
 
-  constructor(private movieService: MovieService, 
+  constructor(private router: Router,
+              private movieService: MovieService, 
               private authenticationService: AuthenticationService) { }
   
   ngOnInit(){
@@ -106,10 +108,8 @@ export class MovieComponent implements OnInit {
     document.getElementById('load-movies-form')?.click();
     this.movieService.loadMovies(disc).subscribe(
       (event: any) => {
-       if (event instanceof HttpResponse) {
-          this.message = event.body.message;
+          this.message = event.message;
           this.getMovies();
-        }
       },
       (err: any) => {
         console.log(err);
