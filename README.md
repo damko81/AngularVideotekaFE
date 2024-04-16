@@ -47,4 +47,24 @@ Popravljanje uporabniškega profila prijavljenega uporabnika:
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/58759df1-9df9-4c89-a8ad-943582b11c5a)
 
+Importanje Filmi.xml in exsportanje v Filmi.xml (Imp/Exp XML):
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/b2d2fca6-aa9f-4700-920e-572ff603dfb3)
+
+Lahko se trenutno stanje naloženih filmov exsporta v datoteko Filmi.xml, ki se jo uporabi kot vir podatkov za namizno aplikacijo Videoteka.
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/2b54a223-fa64-4aa0-8225-9b6706d79099)
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/b44298c8-9c21-4d47-aacf-0663f2db45ef)
+
+Z klikom na eksportano datoteko Filmi.xml posname na lokalni računalnik. Dodamo jo k namiszni aplikaciji Videoteka:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/0125245b-522c-42b0-8cb7-e8231286c56f)
+
+Ob zagonu namizne aplikacije Videoteka, Filmi.xml se naložijo:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/8f2b17c6-fbb1-4c96-97ae-cac9e8c25a74)
+
+
+
 
