@@ -65,6 +65,17 @@ Ob zagonu namizne aplikacije Videoteka, Filmi.xml se naložijo:
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/8f2b17c6-fbb1-4c96-97ae-cac9e8c25a74)
 
+Enako lahko uvozimo datoteko Filmi.xml, ki je nastala z namizno aplikacijo Videoteka.
+Izbrana datoteka mora biti Filmi.xml.
+
+Primer, da izberemo napačno datoteko in jo želimo uvoziti, javi napako:
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/0454593b-389b-4c0c-b892-af28d2c93a85)
+
+Izberem pravo datoteko in jo uvozim:
+V seznamu datotek klienta vidimo [ime uporabnika]_Filmi.xml
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/b952c23d-8756-4619-a3d9-6bea9d4964ad)
+
 
 
 
