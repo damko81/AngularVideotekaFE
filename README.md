@@ -25,7 +25,7 @@ Filmi, ki so na izbranem direktoriju, se uvozijo v MSSqlServer14. Podatki o film
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/09e718f4-1ce0-46f7-b96c-7fea530c40a7)
 
-Prijava z autenticiranim uporabnikom admin:
+Prijava z autenticiranim uporabnikom = admin in geslom = password:
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/73196116-37c9-4296-b523-288930423fd7)
 
@@ -84,6 +84,9 @@ V sistem se je odal novi filem Evil Dead, ki je sedaj viden:
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/8d089cfa-5497-4f68-b317-6696e3a3970f)
 
+Če se v sistem prijavimo kot uporabnik = admin z geslom = password, se v Imp/Exp XML vidijo uvozi vseh [username]_Filmi.xml datotek:
+
+![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/ca0968d0-6cda-4cb8-b114-d7fb3ac1aa1a)
 
 
 
