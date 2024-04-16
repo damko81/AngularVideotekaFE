@@ -29,13 +29,12 @@ export class MovieService{
   }
 
   public deleteMovieByDisc(disc: string): Observable<void>{
-      return this.http.delete<void>(`${this.apiServerUrl}/movie/deleteMovieByDisc/${disc}`);
+      let discTmp: string = disc.replace(/\\/, '');
+      return this.http.delete<void>(`${this.apiServerUrl}/movie/deleteMovieByDisc/${discTmp}`);
   }
 
   public loadMovies(disc: string): Observable<HttpEvent<any>>{
-    
-    return this.http.post<HttpEvent<any>>(`${this.apiServerUrl}/movie/load`,disc);
-      
+    return this.http.post<HttpEvent<any>>(`${this.apiServerUrl}/movie/load`,disc);  
   }
 
 }
